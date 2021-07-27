@@ -1,3 +1,3 @@
 function getLastUpdatedDate() {
-    return "Last updated: " + document.lastModified.substr(0, 10);
+    $("#lastModified").textContent = "Last updated: " + document.lastModified.substr(0, 10);
 }
