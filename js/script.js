@@ -1,5 +1,5 @@
 (function() {
-    $("#lastModified").textContent = "Last updated: " + document.lastModified.substr(0, 10);
+    document.getElementById("lastModified").innerText = "Last updated: " + document.lastModified.substr(0, 10);
 
 
 })();
