@@ -1,0 +1,221 @@
+<!-- todo: add header/footer/etc. this was yoinked from old blog on gitlab -->
+
+
+    <style>
+            .circleLoader {
+                border: 16px solid #eeeeee;
+                border-radius: 50%;
+                border-top: 16px solid #555555;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: clockwiseSpin 2s linear infinite; /* Safari */
+                animation: clockwiseSpin 2s linear infinite;
+            }
+        
+            .circleLoaderStall {
+                border: 16px solid #eeeeee;
+                border-radius: 50%;
+                border-top: 16px solid #0094ff;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: clockwiseSpin 2s cubic-bezier(0.51, 0.18, 0, 0.7) infinite; /* Safari */
+                animation: clockwiseSpin 2s cubic-bezier(0.51, 0.18, 0, 0.7) infinite;
+            }
+        
+        
+            .moonLoader {
+                border-radius: 50%;
+                border-top: 16px solid #aaaaaa;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: clockwiseSpin 2s linear infinite; /* Safari */
+                animation: clockwiseSpin 2s linear infinite;
+            }
+        
+            .twoMoonLoader {
+                border-radius: 50%;
+                border-top: 16px solid #aaaaaa;
+                border-bottom: 16px solid #555555;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: clockwiseSpin 3s linear infinite; /* Safari */
+                animation: clockwiseSpin 3s linear infinite;
+            }
+        
+        
+            .squareLoader {
+                border: 15px solid #555555;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: clockwiseSpin 4s linear infinite; /* Safari */
+                animation: clockwiseSpin 4s linear infinite;
+            }
+        
+        
+            .squareLoader2 {
+                border: 12px solid #eeeeee;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: clockwiseSpin 3s linear infinite; /* Safari */
+                animation: clockwiseSpin 3s linear infinite;
+                margin-top: -80px;
+            }
+        
+            .gearLoader1 {
+                border: 15px solid #aaaaaa;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: clockwiseSpin 6s linear infinite; /* Safari */
+                animation: clockwiseSpin 6s linear infinite;
+            }
+        
+            .gearLoader2 {
+                border: 12px solid #777777;
+                width: 50px;
+                height: 50px;
+                -webkit-animation: clockwiseSpin 3s linear infinite; /* Safari */
+                animation: clockwiseSpin 3s linear infinite;
+                margin-top: -30px;
+                margin-left: 40px;
+            }
+        
+            .gearLoader3 {
+                border: 12px solid #333333;
+                width: 35px;
+                height: 35px;
+                -webkit-animation: clockwiseSpin 2s linear infinite; /* Safari */
+                animation: clockwiseSpin 2s linear infinite;
+                margin-top: -60px;
+                margin-left: 70px;
+            }
+        
+            /* Safari */
+            @-webkit-keyframes clockwiseSpin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+        
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+        
+            @keyframes clockwiseSpin {
+                0% {
+                    transform: rotate(0deg);
+                }
+        
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        
+            /* Safari */
+            @-webkit-keyframes counterClockwiseSpin {
+                0% {
+                    -webkit-transform: rotate(360deg);
+                }
+        
+                100% {
+                    -webkit-transform: rotate(0deg);
+                }
+            }
+        
+            @keyframes counterClockwiseSpin {
+                0% {
+                    transform: rotate(360deg);
+                }
+        
+                100% {
+                    transform: rotate(0deg);
+                }
+            }
+        </style>
+
+</head>
+<body>
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <div class="container">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-square fa-stack-2x" style="color:#666;"></i>
+                <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+            </span>
+            <a href="/" class="navbar-brand" style="padding-left: 10px;">
+                WilcoForr
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                        <li id="index" class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                        <li id="projects" class="nav-item"><a class="nav-link" href="../projects.html">Projects</a></li>
+                        <li id="blog" class="nav-item"><a class="nav-link" href="index.html">Blog</a></li>
+                        <li id="about" class="nav-item"><a class="nav-link" href="../about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://gitlab.com/users/wilcoforr/projects">GitLab Profile <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>@ViewData["Title"]</h1>
+                        <hr />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Bit of a playground of CSS loaders. Inspect/view source to get the code for each of the loaders.</p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <h3>Circles</h3>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="circleLoader"></div>
+                    </div>
+                    <div class="col">
+                        <div class="circleLoaderStall"></div>
+                    </div>
+                    <div class="col">
+                        <div class="moonLoader"></div>
+                    </div>
+                    <div class="col">
+                        <div class="twoMoonLoader"></div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <h3>Squares</h3>
+                    </div>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="squareLoader"></div>
+                    </div>
+                    <div class="col">
+                        <div class="squareLoader"></div>
+                        <div class="squareLoader2"></div>
+                    </div>
+                    <div class="col">
+                        <div class="gearLoader1"></div>
+                        <div class="gearLoader2"></div>
+                        <div class="gearLoader3"></div>
+                    </div>
+                </div>
+                
+
+                
+                
+    </div>
+

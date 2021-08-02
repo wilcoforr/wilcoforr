@@ -1,0 +1,79 @@
+<!-- todo: add header/footer/etc. this was yoinked from old blog on gitlab -->
+
+    <div class="container body-content">
+
+
+            <div class="row">
+                    <div class="col-md-12">
+                        <p>Recently I was thinking of making a "C# script" to run daily to get the Bing Image of the Day. The program will download the current Bing Image of the Day into an Images folder. If the file has already been downloaded, a duplicate will not be made.</p>
+                        <p>This was done quite nicely, and I used the <code>dynamic</code> keyword in a nice and elegant way instead of needing to make a class representing the JSON to deserialize the JSON response correctly.</p>
+                    </div>
+                </div>
+                
+                <pre><code class="language-csharp">namespace BingImageOfTheDay
+                {
+                    using System;
+                    using System.IO;
+                    using System.Net;
+                    using Newtonsoft.Json.Linq; //install Newtonsoft.Json via NuGet
+                
+                    public static class Program
+                    {
+                        public static void Main(string[] args)
+                        {
+                            string imagesDir = Environment.CurrentDirectory + "\\Images";
+                
+                            try
+                            {
+                                if (!Directory.Exists(imagesDir))
+                                {
+                                    Directory.CreateDirectory(imagesDir);
+                                }
+                
+                                using (var client = new WebClient())
+                                {
+                                    string bingImageOfTheDayApi = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
+                                    string bingImageOfTheDayJson = client.DownloadString(bingImageOfTheDayApi);
+                
+                                    //like python (or any other dynamically typed lang)
+                                    //dynamic is used to get the json's response for the image url
+                                    //no need to deserialize to a class
+                                    dynamic parsedJson = JObject.Parse(bingImageOfTheDayJson);
+                                    string imageUrl = "https://www.bing.com" + parsedJson.images[0].url;
+                                    string fileTitle = parsedJson.images[0].title;
+                
+                                    var validFileName = (DateTime.Now.ToShortDateString() + "_" + fileTitle)
+                                        .Replace(" ", "-")
+                                        .Split(Path.GetInvalidFileNameChars());
+                
+                                    string finalFileName = String.Join("-", validFileName) + ".jpg";
+                
+                                    if (!File.Exists(imagesDir + "\\" + finalFileName))
+                                    {
+                                        Console.WriteLine($"Downloaded: {imageUrl} {Environment.NewLine}as{Environment.NewLine}{finalFileName}");
+                                        client.DownloadFile(imageUrl, imagesDir + "\\" + finalFileName);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("File has already been downloaded.");
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex);
+                            }
+                            finally
+                            {
+                                Console.WriteLine("---------------------------------------------------");
+                                Console.WriteLine("Press enter to exit.");
+                                Console.ReadLine();
+                            }
+                        }
+                    }
+                }
+                </code></pre>
+
+    </div>
+
+

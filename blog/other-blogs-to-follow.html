@@ -1,0 +1,45 @@
+<!-- todo: add header/footer/etc. this was yoinked from old blog on gitlab -->
+
+    <div class="container body-content">
+        
+
+            <div class="row">
+
+                    <div class="col">
+
+                               <h1>A list of other blogs I follow</h1>
+                        
+                                <ul id="blogList">
+                                    <li><a href="https://msdn.microsoft.com/en-us/magazine/">MSDN Magazine</a></li>
+                                    <li><a href="https://www.hanselman.com/blog/">Scott Hansellman</a></li>
+                                    <li><a href="https://ericlippert.com/">Eric Lippert</a></li>
+                                    <li><a href="https://www.troyhunt.com/">Troy Hunt</a></li>
+                                    <li><a href="https://blog.codinghorror.com/">Coding Horror</a></li>
+                                    <li><a href="https://codeblog.jonskeet.uk/">Jon Skeet</a></li>
+                                    <li><a href="https://aspnetmonsters.com/">ASP Net Monsters</a></li>
+                                    <li><a href="https://weblogs.asp.net/">General ASP.NET Blogs</a></li>
+                                </ul>
+
+
+                    </div>
+                </div>
+
+                
+                
+    </div>
+
+<!-- footer here, bootstrap scripts, then put custom script below -->
+                            
+    <script>
+        const blogList = document.getElementById("blogList");
+        const links = blogList.getElementsByTagName("li");
+        for (let i = 0; i < links.length; i++) {
+    
+            let oldText = links[i].innerHTML;
+    
+            let newText = oldText.replace("</a>", " <i class='fa fa-external-link' aria-hidden='true'></i></a>");
+    
+            links[i].innerHTML = newText;
+        }
+    </script>
+
