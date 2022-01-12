@@ -93,19 +93,19 @@ public static StringBuilder BuildCsv(string header, List&lt;List&lt;string&gt;&g
     {
         string csvLine = "";
         foreach (string lineItem in line)
-    {
+        {
+            string temp = lineItem ?? "-"; // if null, give a default
 
-    string temp = lineItem ?? "-"; // if null, give a default
+            //check for a comma in a string (like if the string contained "Acme, LLC"),
+            //then escape it so it doesnt mess up the csv formatting
+            if (temp.Contains(comma))
+            {
+                temp = '"' + temp + '"';
+            }
 
-    //check for a comma in a string (like if the string contained "Acme, LLC"),
-    //then escape it so it doesnt mess up the csv formatting
-    if (temp.Contains(comma))
-    {
-    temp = '"' + temp + '"';
+            csvLine += temp + comma;
         }
-
-    csvLine += temp + comma;
-    }
+        
         csvBuilder.AppendLine(csvLine);
     }
 
