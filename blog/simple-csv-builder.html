@@ -84,31 +84,32 @@
 /// &lt;returns&gt;&lt;/returns&gt;
 public static StringBuilder BuildCsv(string header, List&lt;List&lt;string&gt;&gt; lines)
 {
-var csvBuilder = new StringBuilder();
-const string comma = ",";
+    var csvBuilder = new StringBuilder();
+    const string comma = ",";
 
-csvBuilder.AppendLine(header);
+    csvBuilder.AppendLine(header);
 
-foreach (var line in lines)
-{
-string csvLine = "";
-foreach (string lineItem in line)
-{
-string temp = lineItem ?? "-"; // if null, give a default
+    foreach (var line in lines)
+    {
+        string csvLine = "";
+        foreach (string lineItem in line)
+    {
 
-//check for a comma in a string (like if the string contained "Acme, LLC"),
-//then escape it so it doesnt mess up the csv formatting
-if (temp.Contains(comma))
-{
-temp = '"' + temp + '"';
-}
+    string temp = lineItem ?? "-"; // if null, give a default
 
-csvLine += temp + comma;
-}
-csvBuilder.AppendLine(csvLine);
-}
+    //check for a comma in a string (like if the string contained "Acme, LLC"),
+    //then escape it so it doesnt mess up the csv formatting
+    if (temp.Contains(comma))
+    {
+    temp = '"' + temp + '"';
+        }
 
-return csvBuilder;
+    csvLine += temp + comma;
+    }
+        csvBuilder.AppendLine(csvLine);
+    }
+
+    return csvBuilder;
 }
 </code></pre>
 
