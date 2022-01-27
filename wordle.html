@@ -67,7 +67,7 @@
     <div class="container">
         <div class="row">
             <h1>Wordle Clone</h1>
-            <p id="randomWord" style="display:none;"></p>
+            <p id="randomWord"></p>
             <button id="resetWordButton" onclick="resetWord()">Reset Word</button>
         </div>
 
@@ -13103,6 +13103,7 @@ function resetWord() {
        resetWord();
    }
 }
+resetWord(); //init
 
 function guess() {
     let letterInputs = document.getElementsByClassName("letterInput");
@@ -13122,6 +13123,10 @@ function guess() {
     guessWord = guessWord.toLowerCase();
 
     let randomWord = localStorage.getItem("randomWord");
+
+    if (randomWord == guessWord) {
+        window.alert("You won!");
+    }
 
     // if (!words.includes(guessWord)) {
     //     window.alert("Enter a valid English 5 letter word.");
