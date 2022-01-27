@@ -21,7 +21,7 @@
 
     <link rel="icon" href="favicon.ico">
 
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
 
     <style>
         input:invalid {
@@ -2416,7 +2416,8 @@
 "rower",
 "artsy",
 "rural",
-"shave"],Ta=["aahed",
+"shave",
+"aahed",
 "aalii",
 "aargh",
 "aarti",
@@ -13104,6 +13105,7 @@ function getGuess() {
     let matchedWords = [];
     let usePosition = document.getElementById("checkLetterPositionCheckbox").checked;
 
+    //could use regex also, this is just a quick algorithm I came up with to push matched words into an array
     for (let word of words) {
         let match = true;
         
@@ -13132,7 +13134,6 @@ function getGuess() {
         }
     }
     matchedWords.sort();
-    console.log(matchedWords);
     const wordListUL = document.getElementById("wordList");
     wordListUL.innerHTML = ""; //reset if populated already
     for (let word of matchedWords) {
