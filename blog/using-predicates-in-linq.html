@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 
@@ -71,23 +69,24 @@
                     
                             <p>Due to an old codebase and how some data was set up, I found myself repeating the following LINQ statement in several places. I decided to factor it out into it's own property member of the class and use that in the <code>.Where()</code> calls.</p>
             <pre><code class="language-csharp">
-            private static Predicate&lt;FeeCode&gt; ActiveFeeCodeFilter
-            {
-            get
-            {
-            return  f =&gt;    (f.DateEnd &gt; DateTime.Now || f.DateEnd == null)
-                &amp;&amp;  f.DateStart &lt; DateTime.Now;
-            }
-            }
+private static Predicate&lt;FeeCode&gt; ActiveFeeCodeFilter
+{
+    get
+    {
+        return  f =&gt; (f.DateEnd &gt; DateTime.Now || f.DateEnd == null)
+            &amp;&amp; f.DateStart &lt; DateTime.Now;
+    }
+}
             </code></pre>
             
-            <pre><code class="language-csharp">public static IEnumerable&lt;FeeCode&gt; GetAllActiveFeeCodes()
-            {
-            return dbContext.FeeCode
-                    .OrderBy(f =&gt; f.Name)
-                    .AsEnumerable()
-                    .Where(f =&gt; ActiveFilter(f));
-            }
+            <pre><code class="language-csharp">
+public static IEnumerable&lt;FeeCode&gt; GetAllActiveFeeCodes()
+{
+    return dbContext.FeeCode
+            .OrderBy(f =&gt; f.Name)
+            .AsEnumerable()
+            .Where(f =&gt; ActiveFilter(f));
+}
             </code></pre>
                     
                     
