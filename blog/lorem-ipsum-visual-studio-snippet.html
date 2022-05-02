@@ -24,13 +24,13 @@
                 <div class="row">
                     <div class="col-sm-8 col-md-7 py-4">
                         <h4 class="text-white">wilcoforr</h4>
-                        <p class="text-muted">Full stack .NET software developer.  Programming interests are full stack web development, developing games in Unity,
-                            and image processing.</p>
+                        <p class="text-muted">Full stack .NET software developer.</p>
                     </div>
                     <div class="col-sm-4 offset-md-1 py-4">
-                        <h4 class="text-white">Contact</h4>
+                        <h4 class="text-white">More Info</h4>
                         <ul class="list-unstyled">
                             <li><a href="https://wilcoforr.github.io/wilcoforr/" class="text-white">Home</a></li>
+                            <li><a href="https://wilcoforr.github.io/wilcoforr/blog/blog.html" class="text-white">Blog</a></li>
                             <li><a href="https://www.github.com/wilcoforr/" class="text-white">My GitHub</a></li>
                         </ul>
                     </div>
@@ -59,47 +59,54 @@
                     <div class="row">
                         <div class="col">
                             <p>I made a few snippets that use the popular lorem ipsum for mocking up content. Useful for
-                                when you are designing a new webpage and need content. For example, after you download and
-                                import the snippets, entering <code>&lt;lorem1</code> then press tab twice, and like other
-                                snippets, you get a paragraph of lorem ipsum. The download includes two other snippets -
-                                lorem2 and lorem 3.</p>
-    
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae ante non sapien
+                                when you are designing a new webpage and need content. For example, after you create the
+                                snippet, entering <code>&lt;lorem1</code> then press tab twice, and like other
+                                snippets, you get a paragraph of lorem ipsum.</p>
+
+                            <hr>
+                            <p><em>
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae ante non sapien
                                 consectetur imperdiet. Suspendisse potenti. Praesent urna nisl, fermentum quis urna
                                 convallis, gravida ullamcorper purus. Sed vitae malesuada libero, ac blandit mi. Vivamus
                                 tincidunt mauris eros. Ut vitae aliquam ligula, a ultricies sem. Morbi molestie ante ut
                                 felis faucibus, eu sagittis orci pretium. Nulla facilisi. Vivamus mattis arcu lacus, at
-                                malesuada erat imperdiet a. Morbi eros metus, accumsan a lacinia ac, pulvinar ut arcu. Donec
-                                id mauris magna.
-                            </p>
-    
-                            <p><a href="~/downloads/lorem-ipsum-snippets.zip">Download the Lorem Ipsum Snippets</a></p>
+                                malesuada erat imperdiet a. Morbi eros metus, accumsan a lacinia ac, pulvinar ut arcu.
+                                Donec id mauris magna."
+                            </em></p>
+                            <hr>
+
+                            <p>To create a code snippet in Visual Studio (Visual Studio 2022 as of this post)</p>
+                            <ol>
+                                <li>Save the XML code below into a new file in a text editor of your choice as "lorem.snippet".</li>
+                                <li>Launch Visual Studio, then go to Tools -> Code Snippet Manager. Choose HTML as the language.</li>
+                                <li>Next, press the Import button to import the lorem.snippet file you created.</li>
+                            </ol>
+                            <hr>
                         </div>
                     </div>
-    
-    
-    
+
+
+
                     <div class="row">
                         <div class="col">
-                            <pre><code class="language-xml">
-                        &lt;?xml version="1.0" encoding="utf-8" ?&gt;
-                        &lt;CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet"&gt;
-                            &lt;CodeSnippet Format="1.0.0"&gt;
-                                &lt;Header&gt;
-                                    &lt;Title&gt;lorem ipsum 1&lt;/Title&gt;
-                                    &lt;Author&gt;wilcoforr&lt;/Author&gt;
-                                    &lt;Description&gt;First paragraph of lorem ipsum placeholder text, 542 characters long.&lt;/Description&gt;
-                                    &lt;Shortcut&gt;lorem1&lt;/Shortcut&gt;
-                                &lt;/Header&gt;
-                                &lt;Snippet&gt;
-                                    &lt;Code Language="HTML"&gt;
-                                        &lt;![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae ante non sapien consectetur imperdiet. Suspendisse potenti. Praesent urna nisl, fermentum quis urna convallis, gravida ullamcorper purus. Sed vitae malesuada libero, ac blandit mi. Vivamus tincidunt mauris eros. Ut vitae aliquam ligula, a ultricies sem. Morbi molestie ante ut felis faucibus, eu sagittis orci pretium. Nulla facilisi. Vivamus mattis arcu lacus, at malesuada erat imperdiet a. Morbi eros metus, accumsan a lacinia ac, pulvinar ut arcu. Donec id mauris magna.]]&gt;
-                                    &lt;/Code&gt;
-                                &lt;/Snippet&gt;
-                            &lt;/CodeSnippet&gt;
-                        &lt;/CodeSnippets&gt;
-                        </code></pre>
+<pre><code class="language-xml">
+&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet"&gt;
+    &lt;CodeSnippet Format="1.0.0"&gt;
+        &lt;Header&gt;
+            &lt;Title&gt;lorem ipsum 1&lt;/Title&gt;
+            &lt;Author&gt;wilcoforr&lt;/Author&gt;
+            &lt;Description&gt;First paragraph of lorem ipsum placeholder text, 542 characters long.&lt;/Description&gt;
+            &lt;Shortcut&gt;lorem1&lt;/Shortcut&gt;
+        &lt;/Header&gt;
+        &lt;Snippet&gt;
+            &lt;Code Language="HTML"&gt;
+                &lt;![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae ante non sapien consectetur imperdiet. Suspendisse potenti. Praesent urna nisl, fermentum quis urna convallis, gravida ullamcorper purus. Sed vitae malesuada libero, ac blandit mi. Vivamus tincidunt mauris eros. Ut vitae aliquam ligula, a ultricies sem. Morbi molestie ante ut felis faucibus, eu sagittis orci pretium. Nulla facilisi. Vivamus mattis arcu lacus, at malesuada erat imperdiet a. Morbi eros metus, accumsan a lacinia ac, pulvinar ut arcu. Donec id mauris magna.]]&gt;
+            &lt;/Code&gt;
+        &lt;/Snippet&gt;
+    &lt;/CodeSnippet&gt;
+&lt;/CodeSnippets&gt;
+</code></pre>
                         </div>
                     </div>
                 </div>

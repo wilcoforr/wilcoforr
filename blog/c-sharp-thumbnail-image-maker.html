@@ -24,13 +24,13 @@
                 <div class="row">
                     <div class="col-sm-8 col-md-7 py-4">
                         <h4 class="text-white">wilcoforr</h4>
-                        <p class="text-muted">Full stack .NET software developer.  Programming interests are full stack web development, developing games in Unity,
-                            and image processing.</p>
+                        <p class="text-muted">Full stack .NET software developer.</p>
                     </div>
                     <div class="col-sm-4 offset-md-1 py-4">
-                        <h4 class="text-white">Contact</h4>
+                        <h4 class="text-white">More Info</h4>
                         <ul class="list-unstyled">
                             <li><a href="https://wilcoforr.github.io/wilcoforr/" class="text-white">Home</a></li>
+                            <li><a href="https://wilcoforr.github.io/wilcoforr/blog/blog.html" class="text-white">Blog</a></li>
                             <li><a href="https://www.github.com/wilcoforr/" class="text-white">My GitHub</a></li>
                         </ul>
                     </div>
@@ -67,77 +67,77 @@
                 
 
 <pre>
-    namespace ThumbnailMaker
+namespace ThumbnailMaker
+{
+    using System;
+    using System.IO;
+    using System.Linq;
+
+    using ImageMagick; //install ImageMagick via Nuget
+
+    /// <summary>
+    /// Requirements: nuget install ImageMagick
+    /// Then, when the program runs, it will resize all images in the Images 
+    /// directory of the current .exe location. You can change anything
+    /// in this "script" to fit whatever case you want.
+    /// </summary>
+    internal static class Program
     {
-        using System;
-        using System.IO;
-        using System.Linq;
-    
-        using ImageMagick; //install ImageMagick via Nuget
-    
-        /// <summary>
-        /// Requirements: nuget install ImageMagick
-        /// Then, when the program runs, it will resize all images in the Images 
-        /// directory of the current .exe location. You can change anything
-        /// in this "script" to fit whatever case you want.
-        /// </summary>
-        internal static class Program
+        const string THUMB_PREPEND = "thumb_";
+        const string IMAGES_DIR = @"Images\";
+
+        internal static void Main(string[] args)
         {
-            const string THUMB_PREPEND = "thumb_";
-            const string IMAGES_DIR = @"Images\";
-    
-            internal static void Main(string[] args)
+            string[] imagePaths = Directory.GetFiles(IMAGES_DIR)
+                                .Where(f => !f.Contains(THUMB_PREPEND))
+                                .Select(f => f)
+                                .ToArray();
+
+            Console.WriteLine($"Will create {imagePaths.Length} thumbnail images.");
+
+            try
             {
-                string[] imagePaths = Directory.GetFiles(IMAGES_DIR)
-                                    .Where(f => !f.Contains(THUMB_PREPEND))
-                                    .Select(f => f)
-                                    .ToArray();
-    
-                Console.WriteLine($"Will create {imagePaths.Length} thumbnail images.");
-    
-                try
+                foreach (var imagePath in imagePaths)
                 {
-                    foreach (var imagePath in imagePaths)
-                    {
-                        //set ignoreAspectRatio to true to ignore aspect ratio
-                        ResizeImage(new FileInfo(imagePath), ignoreAspectRatio: false);
-                    }
+                    //set ignoreAspectRatio to true to ignore aspect ratio
+                    ResizeImage(new FileInfo(imagePath), ignoreAspectRatio: false);
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error!");
-                    Console.WriteLine(ex.Message);
-                }
-    
-                Console.WriteLine("Done. Press enter to exit.");
-                Console.ReadLine();
             }
-    
-            private static void ResizeImage(FileInfo imageFileInfo, bool ignoreAspectRatio = false)
+            catch (Exception ex)
             {
-                // Read from file
-                using (var image = new MagickImage(imageFileInfo.FullName))
-                {
-                    var size = new MagickGeometry(100, 100);
-    
-                    // This will resize the image to a fixed size without maintaining the aspect ratio.
-                    // Normally an image will be resized to fit inside the specified size.
-                    size.IgnoreAspectRatio = ignoreAspectRatio;
-    
-                    image.Resize(size);
-    
-                    string resizedName = imageFileInfo.Directory
-                        + "\\"
-                        + THUMB_PREPEND //prepend "thumb" so all thumbnails are grouped nicely
-                        + imageFileInfo.Name;
-    
-                    // Save the result
-                    image.Write(resizedName);
-                    Console.WriteLine("Created a thumbnail of: " + imageFileInfo.Name);
-                }
+                Console.WriteLine("Error!");
+                Console.WriteLine(ex.Message);
+            }
+
+            Console.WriteLine("Done. Press enter to exit.");
+            Console.ReadLine();
+        }
+
+        private static void ResizeImage(FileInfo imageFileInfo, bool ignoreAspectRatio = false)
+        {
+            // Read from file
+            using (var image = new MagickImage(imageFileInfo.FullName))
+            {
+                var size = new MagickGeometry(100, 100);
+
+                // This will resize the image to a fixed size without maintaining the aspect ratio.
+                // Normally an image will be resized to fit inside the specified size.
+                size.IgnoreAspectRatio = ignoreAspectRatio;
+
+                image.Resize(size);
+
+                string resizedName = imageFileInfo.Directory
+                    + "\\"
+                    + THUMB_PREPEND //prepend "thumb" so all thumbnails are grouped nicely
+                    + imageFileInfo.Name;
+
+                // Save the result
+                image.Write(resizedName);
+                Console.WriteLine("Created a thumbnail of: " + imageFileInfo.Name);
             }
         }
-    }    
+    }
+}    
 </pre>
 
             </div>
