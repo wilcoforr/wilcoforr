@@ -65,7 +65,7 @@
             <h1>Wordle Clone</h1>
             <p><strong>Warning: Does not work on Mobile (yet).</strong></p>
             <p>See also my <a href="https://wilcoforr.github.io/wilcoforr/blog/wordle-helper.html">Wordle Helper</a> that can give you "hints"... aka help you cheat :)</p>
-            <p id="randomWord"></p>
+            <p id="randomWord" style="display:none;"></p>
             <p>Guesses left: <span id="guessCount"></span></p>
             <button id="resetWordButton" onclick="resetWord()">Reset Word</button>
         </div>
@@ -2433,11 +2433,10 @@ function resetWord() {
 
     if (localStorage.getItem("randomWord") == null) {
         localStorage.setItem("randomWord", randomWord);
-
         document.getElementById("randomWord").innerText = randomWord;
-
+        localStorage.setItem("guessCount", 6);
     }
-   else {
+    else {
        localStorage.removeItem("randomWord");
        localStorage.setItem("guessCount", 6);
        document.getElementById("guessCount").innerText = localStorage.getItem("guessCount");
@@ -2486,10 +2485,10 @@ function guess() {
     
 
 
-
-
-    if (randomWord == guessWord) {
+	let hasWon = false;
+    if (randomWord === guessWord) {
         window.alert("You won!");
+		hasWon = true;
     }
 
 
@@ -2507,6 +2506,11 @@ function guess() {
         }
     }
 
+	if (hasWon) {
+			setTimeout(function () {
+			window.location.reload();
+		}, 1000);
+	}
 
 }
 
