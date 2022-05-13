@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="wilcoforr's home GitHub site">
+    <meta name="author" content="wilcoforr">
+
+    <title>wilcoforr - MTG JSON</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link href="../css/styles.css" rel="stylesheet">
+    <link ref="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-white">wilcoforr</h4>
+                        <p class="text-muted">Full stack .NET software developer.</p>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="text-white">More Info</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="https://wilcoforr.github.io/wilcoforr/" class="text-white">Home</a></li>
+                            <li><a href="https://wilcoforr.github.io/wilcoforr/blog/blog.html" class="text-white">Blog</a></li>
+                            <li><a href="https://www.github.com/wilcoforr/" class="text-white">My GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a href="https://wilcoforr.github.io/wilcoforr/" class="navbar-brand d-flex align-items-center">
+                    <strong>wilcoforr</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container body-content">
+
+
+            <section class="section">
+                <div class="container">
+                    <h1 class="title">
+                        MTG JSON
+                    </h1>
+                    <p>Using the JavaScript `fetch` API and &lt;template&gt; to generate a table of Magic the Gathering Cards from https://mtgjson.com/downloads/all-sets/, Innistrad: Crimson Vow expansion.</p>
+                    <hr>
+                    <table id="cards" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Cost</td>
+                                <td>Power</td>
+                                <td>Toughness</td>
+                                <td>Text</td>
+                                <td>Flavor Text</td>
+                                <td>Rarity</td>
+                            </tr>
+                        </thead>
+                        <tbody id="cardsTableBody">
+            
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <template id="cardRow">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </template>
+            
+        </div>
+    </main>
+
+    <footer class="pt-5 my-5 text-muted border-top text-center">
+        wilcoforr &middot; &copy; <span id="lastModified"></span>
+    </footer>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="../js/script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        //todos maybe: 
+        // - expansion selection
+        // - better UI (pagination, etc, like using DataTables)
+        // - create a deck or "saved cards" list using localStorage
+        // - make into an electron app?
+        // - add link to TCGPlayer or other site using the `identifiers` property on the card
+        if (!("content" in document.createElement("template"))) {
+            window.alert("Template not supported in this browser. This page will not load correctly, try a different browser.");
+        }
+    
+        (async () => {
+            const vow = fetch("https://mtgjson.com/api/v5/VOW.json");
+            
+            //backup of VOW json in case API changes in the future (years from now) - 5 13 2022
+            //const vow = fetch("https://")
+            const vowRes = await vow;
+            const vowResJson = await vowRes.json();
+    
+            const cards = vowResJson.data.cards;
+            const template = document.getElementById("cardRow");
+    
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+    
+                const cardRowClone = template.content.cloneNode(true);
+                const tds = cardRowClone.querySelectorAll("td");
+    
+                tds[0].textContent = card.name;
+                tds[1].textContent = card.manaCost;
+                tds[2].textContent = card.power;
+                tds[3].textContent = card.toughness;
+                tds[4].textContent = card.text;
+                tds[5].textContent = card.flavorText;
+                tds[6].textContent = card.rarity;
+    
+                document.getElementById("cardsTableBody").appendChild(cardRowClone);
+            }
+
+            $(document).ready(function () {
+                $("#cards").DataTable();
+            });
+        })();
+    </script>
+</body>
+
+</html>
+
